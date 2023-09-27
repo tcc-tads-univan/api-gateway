@@ -1,19 +1,14 @@
 package br.tads.ufpr.univangateway.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties
 public class UriConfiguration {
-    private String httpBin = "http://httpbin.org:80";
-    private String carpoolService = "http://localhost:7179";
-
-    public String getHttpBin() {
-        return httpBin;
-    }
-
-    public void setHttpBin(String httpBin) {
-        this.httpBin = httpBin;
-    }
+    @Value("${microservices.carpool.url}")
+    private String carpoolService;
+    @Value("${microservices.univan.url}")
+    private String univanService;
 
     public String getCarpoolService() {
         return carpoolService;
@@ -21,5 +16,13 @@ public class UriConfiguration {
 
     public void setCarpoolService(String carpoolService) {
         this.carpoolService = carpoolService;
+    }
+
+    public String getUnivanService() {
+        return univanService;
+    }
+
+    public void setUnivanService(String univanService) {
+        this.univanService = univanService;
     }
 }

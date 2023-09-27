@@ -1,8 +1,17 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 spring:
   application:
     name: "api-gateway"
 logging:
   level:
     web: debug
+    root: info
+
+microservices:
+  univan:
+    url: ${UNIVAN_URL:http://localhost:5176}
+  carpool:
+    url: ${CARPOOL_URL:http://localhost:7179}
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:4200}
