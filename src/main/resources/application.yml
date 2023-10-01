@@ -9,6 +9,8 @@ logging:
     root: info
 
 microservices:
+  jwt:
+    secret: ${JWT_SECRET:jwtsecretunivantokenkeygenerator}
   univan:
     url: ${UNIVAN_URL:http://localhost:5176}
   carpool:
