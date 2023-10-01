@@ -14,7 +14,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 @SpringBootApplication
 @EnableConfigurationProperties(UriConfiguration.class)
 public class UnivanGatewayApplication {
-    private static final Logger logger = LoggerFactory.getLogger(UnivanGatewayApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UnivanGatewayApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(UnivanGatewayApplication.class, args);
@@ -34,7 +34,7 @@ public class UnivanGatewayApplication {
 
                             ServerHttpRequest redirectRequest = request.mutate().path(backendPath).build();
 
-                            logger.info(String.format("[%s] Redirect to: %s", request.getURI(), redirectRequest.getURI()));
+                            LOGGER.info(String.format("[%s] Redirect to: %s", request.getURI(), redirectRequest.getURI()));
                             return chain.filter(exchange.mutate().request(redirectRequest).build());
                         }))
                         .uri(carpoolService))
@@ -46,7 +46,18 @@ public class UnivanGatewayApplication {
 
                             ServerHttpRequest redirectRequest = request.mutate().path(backendPath).build();
 
-                            logger.info(String.format("[%s] Redirect to: %s", request.getURI(), redirectRequest.getURI()));
+                            LOGGER.info(String.format("[%s] Redirect to: %s", request.getURI(), redirectRequest.getURI()));
+                            return chain.filter(exchange.mutate().request(redirectRequest).build());
+                        }))
+                        .uri(univanService))
+                .route(p -> p.path("/login")
+                        .filters(f -> f.filter((exchange, chain) -> {
+                            ServerHttpRequest request = exchange.getRequest();
+                            String backendPath = "/api/Authentication/login";
+
+                            ServerHttpRequest redirectRequest = request.mutate().path(backendPath).build();
+
+                            LOGGER.info(String.format("[%s] Redirect to: %s", request.getURI(), redirectRequest.getURI()));
                             return chain.filter(exchange.mutate().request(redirectRequest).build());
                         }))
                         .uri(univanService))

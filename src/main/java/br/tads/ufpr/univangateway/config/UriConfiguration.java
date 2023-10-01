@@ -13,16 +13,7 @@ public class UriConfiguration {
     public String getCarpoolService() {
         return carpoolService;
     }
-
-    public void setCarpoolService(String carpoolService) {
-        this.carpoolService = carpoolService;
-    }
-
     public String getUnivanService() {
         return univanService;
-    }
-
-    public void setUnivanService(String univanService) {
-        this.univanService = univanService;
     }
 }
