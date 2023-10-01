@@ -3,7 +3,9 @@ package br.tads.ufpr.univangateway.service;
 public enum PathMapping {
     UNIVAN("/univan", "/api"),
     CARPOOL("/carpool", "/api"),
-    LOGIN("/login", "/api/Authentication/login");
+    LOGIN("/login", "/api/Authentication/login"),
+    DRIVER("/driver", "/api/Driver"),
+    STUDENT("/student", "/api/Student");
 
     private final String frontendPath;
     private final String backendReplacement;

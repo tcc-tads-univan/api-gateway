@@ -45,6 +45,16 @@ public class GatewayConfig {
                 .route(p -> p.path(pathRegex(PathMapping.LOGIN))
                         .filters(f -> f.filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.LOGIN))))
                         .uri(service.getUnivanUri()))
+                .route(p -> p.path(pathRegex(PathMapping.DRIVER))
+                        .filters(f -> f
+                                .filter(authenticationFilter)
+                                .filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.DRIVER))))
+                        .uri(service.getUnivanUri()))
+                .route(p -> p.path(pathRegex(PathMapping.STUDENT))
+                        .filters(f -> f
+                                .filter(authenticationFilter)
+                                .filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.STUDENT))))
+                        .uri(service.getUnivanUri()))
                 .build();
     }
 

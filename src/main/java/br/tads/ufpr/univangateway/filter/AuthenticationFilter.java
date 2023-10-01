@@ -1,6 +1,7 @@
 package br.tads.ufpr.univangateway.filter;
 
 import br.tads.ufpr.univangateway.service.JwtService;
+import br.tads.ufpr.univangateway.service.RouterService;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,22 +22,27 @@ public class AuthenticationFilter implements GatewayFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private RouterService routerService;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
 
-        if (this.isAuthorizationHeaderMissing(request)) {
-            return this.onError(exchange, HttpStatus.UNAUTHORIZED, "Authorization header is missing in request");
+        if (routerService.isRouteSecured.test(request)) {
+            if (this.isAuthorizationHeaderMissing(request)) {
+                return this.onError(exchange, HttpStatus.UNAUTHORIZED, "Authorization header is missing in request");
+            }
+
+            final String token = this.getAuthHeader(request);
+
+            if (jwtService.isInvalid(token)) {
+                return this.onError(exchange, HttpStatus.UNAUTHORIZED, "Authorization header is invalid");
+            }
+
+            this.populateRequestWithHeaders(exchange, token);
         }
 
-        final String token = this.getAuthHeader(request);
-
-        if (jwtService.isInvalid(token)) {
-            return this.onError(exchange, HttpStatus.UNAUTHORIZED, "Authorization header is invalid");
-        }
-
-        this.populateRequestWithHeaders(exchange, token);
         return chain.filter(exchange);
     }
 
