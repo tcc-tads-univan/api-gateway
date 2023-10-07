@@ -1,9 +1,12 @@
 package br.tads.ufpr.univangateway.service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import java.time.Instant;
 
 @Service
 public class JwtService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtService.class);
+
     @Value("${microservices.jwt.secret}")
     private String secret;
     private Key key;
@@ -27,7 +32,12 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
-        return this.getAllClaimsFromToken(token).getExpiration().before(Date.from(Instant.now()));
+        try {
+            return this.getAllClaimsFromToken(token).getExpiration().before(Date.from(Instant.now()));
+        } catch (ExpiredJwtException e) {
+            LOGGER.error("Token expirou: " + e);
+            return true;
+        }
     }
 
     public boolean isInvalid(String token) {
