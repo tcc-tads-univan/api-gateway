@@ -17,3 +17,5 @@ microservices:
     url: ${CARPOOL_URL:http://localhost:7179}
   frontend:
     url: ${FRONTEND_URL:http://localhost:4200}
+  routes:
+    url: ${ROUTES_URL:http://localhost:8081}
