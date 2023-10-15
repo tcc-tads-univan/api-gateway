@@ -1,7 +1,7 @@
 package br.tads.ufpr.univangateway.service;
 
 public enum PathMapping {
-    UNIVAN("/univan", "/api"),
+    ROUTES("/routes", "/api/routes"),
     CARPOOL("/carpool", "/api"),
     LOGIN("/login", "/api/Authentication/login"),
     DRIVER("/driver", "/api/Driver"),

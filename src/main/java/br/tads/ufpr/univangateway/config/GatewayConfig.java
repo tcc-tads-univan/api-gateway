@@ -18,8 +18,8 @@ import reactor.core.publisher.Mono;
 @Configuration
 public class GatewayConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(GatewayConfig.class);
-    private RouterService service;
-    private AuthenticationFilter authenticationFilter;
+    private final RouterService service;
+    private final AuthenticationFilter authenticationFilter;
 
     @Autowired
     public GatewayConfig(RouterService service, AuthenticationFilter authenticationFilter) {
@@ -36,12 +36,12 @@ public class GatewayConfig {
                                 .filter((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.CARPOOL))
                         )
                         .uri(service.getCarpoolUri()))
-                .route(p -> p.path(pathRegex(PathMapping.UNIVAN))
+                .route(p -> p.path(pathRegex(PathMapping.ROUTES))
                         .filters(f -> f
                                 .filter(authenticationFilter)
-                                .filter((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.UNIVAN))
+                                .filter((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.ROUTES))
                         )
-                        .uri(service.getUnivanUri()))
+                        .uri(service.getRoutesUri()))
                 .route(p -> p.path(pathRegex(PathMapping.LOGIN))
                         .filters(f -> f.filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.LOGIN))))
                         .uri(service.getUnivanUri()))

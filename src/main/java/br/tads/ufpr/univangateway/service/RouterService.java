@@ -14,7 +14,10 @@ public class RouterService {
     private String carpoolUri;
     @Value("${microservices.univan.url}")
     private String univanUri;
-    private static List<String> unprotectedRoutes = List.of(
+    @Value("${ROUTES_URL:http://localhost:8081}")
+    private String routesUri;
+
+    private static final List<String> unprotectedRoutes = List.of(
             "/driver",
             "/student",
             "/login"
@@ -33,5 +36,9 @@ public class RouterService {
 
     public String getUnivanUri() {
         return univanUri;
+    }
+
+    public String getRoutesUri() {
+        return routesUri;
     }
 }
