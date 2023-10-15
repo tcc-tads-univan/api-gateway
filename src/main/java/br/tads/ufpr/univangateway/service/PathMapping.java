@@ -5,7 +5,8 @@ public enum PathMapping {
     CARPOOL("/carpool", "/api"),
     LOGIN("/login", "/api/Authentication/login"),
     DRIVER("/driver", "/api/Driver"),
-    STUDENT("/student", "/api/Student");
+    STUDENT("/student", "/api/Student"),
+    SUBSCRIPTION("/subscription", "/api/Subscription");
 
     private final String frontendPath;
     private final String backendReplacement;
