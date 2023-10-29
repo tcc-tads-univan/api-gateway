@@ -63,7 +63,7 @@ public class GatewayConfig {
                 .route(p -> p.path(pathRegex(PathMapping.HISTORY))
                         .filters(f -> f
                                 .filter(authenticationFilter)
-                                .filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.DRIVER)))
+                                .filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.HISTORY)))
                         )
                         .uri(service.getHistoryUri()))
                 .build();
