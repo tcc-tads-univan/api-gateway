@@ -60,6 +60,12 @@ public class GatewayConfig {
                                 .filter(authenticationFilter)
                                 .filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.SUBSCRIPTION))))
                         .uri(service.getUnivanUri()))
+                .route(p -> p.path(pathRegex(PathMapping.HISTORY))
+                        .filters(f -> f
+                                .filter(authenticationFilter)
+                                .filter(((exchange, chain) -> redirectFilter(exchange, chain, PathMapping.DRIVER)))
+                        )
+                        .uri(service.getHistoryUri()))
                 .build();
     }
 

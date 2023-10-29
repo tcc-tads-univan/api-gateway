@@ -16,6 +16,8 @@ public class RouterService {
     private String univanUri;
     @Value("${ROUTES_URL:http://localhost:8081}")
     private String routesUri;
+    @Value("${microservices.history.url}")
+    private String historyUri;
 
     private static final List<String> unprotectedRoutes = List.of(
             "/driver",
@@ -40,5 +42,9 @@ public class RouterService {
 
     public String getRoutesUri() {
         return routesUri;
+    }
+
+    public String getHistoryUri() {
+        return historyUri;
     }
 }

@@ -19,3 +19,5 @@ microservices:
     url: ${FRONTEND_URL:http://localhost:4200}
   routes:
     url: ${ROUTES_URL:http://localhost:8081}
+  history:
+    url: ${HISTORY_URL:http://localhost:5053}
