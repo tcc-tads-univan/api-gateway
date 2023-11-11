@@ -14,7 +14,7 @@ public class RouterService {
     private String carpoolUri;
     @Value("${microservices.univan.url}")
     private String univanUri;
-    @Value("${ROUTES_URL:http://localhost:8081}")
+    @Value("${microservices.routes.url}")
     private String routesUri;
     @Value("${microservices.history.url}")
     private String historyUri;

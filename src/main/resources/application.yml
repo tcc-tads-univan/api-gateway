@@ -5,7 +5,7 @@ spring:
     name: "api-gateway"
 logging:
   level:
-    web: debug
+    web: info
     root: info
 
 microservices:
