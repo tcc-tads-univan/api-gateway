@@ -12,12 +12,12 @@ microservices:
   jwt:
     secret: ${JWT_SECRET:jwtsecretunivantokenkeygenerator}
   univan:
-    url: ${UNIVAN_URL:http://localhost:5176}
+    url: ${UNIVAN_URL:http://localhost:5000}
   carpool:
-    url: ${CARPOOL_URL:http://localhost:7179}
+    url: ${CARPOOL_URL:http://localhost:5001}
   frontend:
     url: ${FRONTEND_URL:http://localhost:4200}
   routes:
-    url: ${ROUTES_URL:http://localhost:8081}
+    url: ${ROUTES_URL:http://localhost:5004}
   history:
-    url: ${HISTORY_URL:http://localhost:5053}
+    url: ${HISTORY_URL:http://localhost:5003}
